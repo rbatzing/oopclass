@@ -1,0 +1,1 @@
+var search_data = {"index":{"searchIndex":["obj","testobj","new()","test_gen()"],"longSearchIndex":["obj","testobj","obj::new()","testobj#test_gen()"],"info":[["Obj","","Obj.html","",""],["TestObj","","TestObj.html","",""],["new","Obj","Obj.html#method-c-new","(x)",""],["test_gen","TestObj","TestObj.html#method-i-test_gen","()",""]]}}
