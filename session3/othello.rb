@@ -175,6 +175,19 @@ class Game
     return unit % @size
   end
  
+  def get_black_move
+    tmparry = Array.new
+    @boardsize.times do |i|
+			if @board[i].state.eql?(:P)
+        tmparry << i
+      end
+    end
+    @choice = tmparry[rand(tmparry.size)]
+    return @choice
+  end
+      
+
+ 
 	def get_move
 		@choice = @boardsize
 	  until @choice >=0 && @choice < @boardsize
@@ -219,6 +232,13 @@ class Game
       next_turn
       find_moves
       update_counts
+      if @count[:P] != 0
+        get_black_move
+        mark_units
+        next_turn
+        find_moves
+        update_counts
+      end
     end
     puts self.to_s
   
@@ -246,6 +266,7 @@ class Othello
   def play
     more = 'Y'
     while more.eql?("Y")
+      @g = Game.new(@size)
       @g.play
       puts "Another Game?"
       STDOUT.flush
