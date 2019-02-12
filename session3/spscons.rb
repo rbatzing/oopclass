@@ -1,3 +1,4 @@
+
 class ScissorsPaperStone
 	CHOICES = [:Stone, :Paper, :Scissors]
 
