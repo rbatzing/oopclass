@@ -250,6 +250,38 @@ class Game
       puts "TIED game!"
     end
   end
+  
+  def autoplay
+    find_moves
+    update_counts
+    until @count[:P] == 0 do
+      puts self.to_s
+      get_black_move
+      mark_units
+      next_turn
+      find_moves
+      update_counts
+      if @count[:P] != 0
+        get_black_move
+        mark_units
+        next_turn
+        find_moves
+        update_counts
+      end
+    end
+    puts self.to_s
+  
+    if @count[:B] > @count[:W]
+      puts "BLACK wins!"
+      return :B
+    elsif @count[:B] < @count[:W]
+      puts "WHITE wins!"
+      return :W
+    else
+      puts "TIED game!"
+      return :T
+    end
+  end
 end
 
 class Othello
@@ -273,9 +305,21 @@ class Othello
       more = gets.chomp.upcase
     end
   end
+  
+  def autoplay
+    @tally = Hash.new(0)
+    10000.times do
+      @g = Game.new(@size)
+      rtn = @g.autoplay
+      @tally[rtn] += 1      
+    end
+    @tally.keys.sort.each do |k|
+      puts "#{k} - #{@tally[k]}"
+    end
+  end
 end
 
 if __FILE__ == $0
   g = Othello.new
-  g.play
+  g.autoplay
 end
